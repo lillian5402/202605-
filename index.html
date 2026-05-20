@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>日本行李寄存服務市場調查報告</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+@page{size:A4;margin:14mm 12mm;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans TC','PingFang TC',sans-serif;background:#f8f3f4;color:#222;font-size:14px;line-height:1.6;}
+.wrap{max-width:860px;margin:0 auto;padding:20px;}
+
+/* ── 封面 ── */
+.cover{background:linear-gradient(140deg,#fff5f6 0%,#fce8eb 55%,#f0d8dc 100%);border-radius:20px;padding:40px 40px 32px;text-align:center;margin-bottom:24px;box-shadow:0 4px 20px rgba(227,143,151,0.15);}
+.cover img{height:60px;margin-bottom:20px;}
+.cover-title-zh{font-size:26px;font-weight:900;color:#1a1a1a;margin-bottom:4px;}
+.cover-title-jp{font-size:14px;color:#7c787b;font-family:'Noto Sans JP',sans-serif;margin-bottom:6px;}
+.cover-date{font-size:12px;color:#b8909a;margin-bottom:22px;font-family:'Noto Sans JP',sans-serif;}
+.cover-divider{border:none;border-top:1px solid rgba(227,143,151,0.35);margin:0 30px 22px;}
+.cover-stats{display:flex;justify-content:center;gap:48px;}
+.stat-num{font-size:38px;font-weight:900;color:#e38f97;}
+.stat-lbl-zh{font-size:13px;color:#555;margin-top:2px;font-weight:500;}
+.stat-lbl-jp{font-size:11px;color:#aaa;font-family:'Noto Sans JP',sans-serif;}
+
+/* ── 總覽卡片 ── */
+.overview{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px;}
+.ov-card{background:#fff;border-radius:16px;padding:20px 16px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,0.06);}
+.ov-pct{font-size:40px;font-weight:900;color:#e38f97;line-height:1.1;}
+.ov-lbl-zh{font-size:13px;color:#333;font-weight:600;margin-top:6px;line-height:1.4;}
+.ov-lbl-jp{font-size:11px;color:#aaa;font-family:'Noto Sans JP',sans-serif;margin-top:3px;}
+
+/* ── 問題卡片 ── */
+.q-card{background:#fff;border-radius:16px;padding:22px 24px;margin-bottom:18px;box-shadow:0 2px 10px rgba(0,0,0,0.06);page-break-inside:avoid;}
+.q-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:10px;}
+.q-badge{display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:28px;background:#fce8eb;border-radius:8px;font-size:12px;font-weight:700;color:#e38f97;padding:0 10px;white-space:nowrap;flex-shrink:0;margin-top:2px;}
+.q-title-zh{font-size:16px;font-weight:700;color:#1a1a1a;line-height:1.4;}
+.q-title-jp{font-size:12px;color:#7c787b;font-family:'Noto Sans JP',sans-serif;margin-top:3px;line-height:1.4;}
+.q-divider{border:none;border-top:1px solid #fce8eb;margin:12px 0 16px;}
+.chart-area{padding:0;}
+
+/* ── 長條圖 ── */
+.bar-chart{display:flex;flex-direction:column;gap:10px;}
+.bar-row{display:grid;grid-template-columns:220px 1fr 60px;align-items:center;gap:12px;}
+.bar-label{line-height:1.3;}
+.label-zh{font-size:13px;font-weight:600;color:#222;}
+.label-jp{font-size:11px;color:#7c787b;font-family:'Noto Sans JP',sans-serif;margin-top:1px;}
+.bar-track{background:#fce8eb;border-radius:20px;height:28px;overflow:hidden;position:relative;}
+.bar-fill{height:100%;background:linear-gradient(to right,#e38f97,#f0b8be);border-radius:20px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;min-width:32px;transition:width 0.3s;}
+.bar-pct{font-size:12px;font-weight:700;color:white;white-space:nowrap;}
+.bar-count{font-size:14px;font-weight:700;color:#e38f97;text-align:right;white-space:nowrap;}
+.low-note{font-size:11px;color:#bbb;margin-top:10px;padding-left:4px;line-height:1.7;border-left:2px solid #fce8eb;padding-left:10px;}
+
+/* ── 甜甜圈 + 側欄 ── */
+.pie-layout{display:grid;grid-template-columns:240px 1fr;gap:24px;align-items:start;}
+.pie-left{display:flex;flex-direction:column;align-items:center;gap:10px;}
+.legend{display:flex;flex-direction:column;gap:5px;width:100%;}
+.legend-item{display:flex;align-items:center;gap:8px;font-size:12px;color:#444;}
+.legend-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0;}
+.legend-text{line-height:1.3;}
+.pie-right{display:flex;flex-direction:column;gap:14px;}
+
+/* ── Insight ── */
+.insight-box{background:#fdf5f6;border-left:3px solid #e38f97;border-radius:0 10px 10px 0;padding:12px 16px;}
+.insight-title{font-size:13px;font-weight:700;color:#e38f97;margin-bottom:6px;}
+.insight-zh{font-size:13px;color:#333;line-height:1.7;margin-bottom:6px;}
+.insight-jp{font-size:12px;color:#7c787b;font-family:'Noto Sans JP',sans-serif;line-height:1.7;}
+
+/* ── 資料表 ── */
+.data-table{border-collapse:collapse;width:100%;font-size:12px;}
+.data-table th{background:#fce8eb;padding:7px 10px;text-align:left;color:#666;font-weight:600;}
+.data-table td{border-bottom:1px solid #f5eaeb;padding:6px 10px;color:#444;}
+.data-table tr:last-child td{border-bottom:none;}
+.pct-cell{color:#e38f97;font-weight:700;text-align:right;}
+.data-table th:last-child{text-align:right;}
+
+/* ── 文字雲 ── */
+.word-cloud{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:#fdf5f6;border-radius:14px;padding:20px;}
+.word-pill{border-radius:50px;color:white;font-weight:700;font-family:'Noto Sans TC','PingFang TC',sans-serif;line-height:1.2;white-space:nowrap;}
+
+/* ── Q11 卡片特殊（無 insight box）── */
+.q11-layout{display:flex;flex-direction:column;gap:16px;}
+
+/* ── 結論 / Next Steps ── */
+.conclusion{background:linear-gradient(135deg,#fff5f6 0%,#fce8eb 100%);border-radius:20px;padding:28px 28px 24px;margin-top:8px;box-shadow:0 2px 14px rgba(227,143,151,0.13);}
+.conclusion-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.conclusion-badge{background:#e38f97;color:white;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;font-family:'Noto Sans JP',sans-serif;white-space:nowrap;}
+.conclusion-title-jp{font-size:20px;font-weight:900;color:#1a1a1a;font-family:'Noto Sans JP',sans-serif;}
+.conclusion-title-zh{font-size:12px;color:#7c787b;margin-top:2px;}
+.next-steps{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.step-card{background:white;border-radius:14px;padding:16px 18px;border-left:4px solid #e38f97;box-shadow:0 1px 6px rgba(0,0,0,0.05);}
+.step-num{font-size:11px;font-weight:700;color:#e38f97;margin-bottom:6px;font-family:'Noto Sans JP',sans-serif;letter-spacing:0.5px;}
+.step-title-jp{font-size:14px;font-weight:700;color:#1a1a1a;font-family:'Noto Sans JP',sans-serif;line-height:1.5;margin-bottom:4px;}
+.step-title-zh{font-size:12px;color:#7c787b;line-height:1.5;margin-bottom:8px;}
+.step-basis{font-size:11px;color:#b8909a;background:#fdf5f6;border-radius:6px;padding:5px 9px;line-height:1.5;}
+
+@media print{body{background:#fff;}.q-card{page-break-inside:avoid;box-shadow:none;border:1px solid #f0e0e3;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- 封面 -->
+<div class="cover">
+  <img src="data:image/png;base64,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" alt="Japaholic">
+  <div class="cover-title-zh">日本荷物預け入れサービス市場調査レポート</div>
+  <div class="cover-title-jp">日本行李寄存服務市場調查報告</div>
+  <div class="cover-date">調査期間：2026年4月</div>
+  <hr class="cover-divider">
+  <div class="cover-stats">
+    <div><div class="stat-num">1,473</div><div class="stat-lbl-zh">有効回答数</div><div class="stat-lbl-jp">有效回覆</div></div>
+    <div><div class="stat-num">14</div><div class="stat-lbl-zh">調査項目数</div><div class="stat-lbl-jp">調查題目</div></div>
+    <div><div class="stat-num">87%</div><div class="stat-lbl-zh">預け入れ経験者</div><div class="stat-lbl-jp">曾使用寄存服務</div></div>
+  </div>
+</div>
+
+<!-- 總覽 -->
+<div class="overview">
+  <div class="ov-card"><div class="ov-pct">88%</div><div class="ov-lbl-zh">荷物に不便を感じる割合</div><div class="ov-lbl-jp">有時/經常感到行李困擾</div></div>
+  <div class="ov-card"><div class="ov-pct">87%</div><div class="ov-lbl-zh">預け入れ経験者の割合</div><div class="ov-lbl-jp">曾使用過寄存服務</div></div>
+  <div class="ov-card"><div class="ov-pct">82%</div><div class="ov-lbl-zh">商業施設での高い利用意向</div><div class="ov-lbl-jp">商場寄存意願高/極高</div></div>
+  <div class="ov-card"><div class="ov-pct">75%</div><div class="ov-lbl-zh">Japaholic Loungeの利用意向</div><div class="ov-lbl-jp">Japaholic Lounge 高/極高意願</div></div>
+</div>
+
+<!-- 各題 -->
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-badge">Q1</div>
+      <div class="q-titles">
+        <div class="q-title-zh">日本旅行中、大きな荷物を持ち歩いて困ったことはありますか？</div>
+        <div class="q-title-jp">在日本旅遊期間，您是否曾因為提著大件行李而感到困擾？</div>
+      </div>
+    </div>
+    <div class="q-divider"></div>
+    <div class="chart-area"><div class="pie-layout">
+    <div class="pie-left">
+      <svg xmlns="http://www.w3.org/2000/svg" width="220" height="220"><path d="M110.0,55.0 L110.0,20.0 A90,90 0 1,1 106.4,199.9 L107.8,165.0 A55,55 0 1,0 110.0,55.0 Z" fill="#e38f97" stroke="white" stroke-width="2"/><path d="M107.8,165.0 L106.4,199.9 A90,90 0 0,1 48.3,44.5 L72.3,69.9 A55,55 0 0,0 107.8,165.0 Z" fill="#c77a85" stroke="white" stroke-width="2"/><path d="M72.3,69.9 L48.3,44.5 A90,90 0 0,1 94.3,21.4 L100.4,55.8 A55,55 0 0,0 72.3,69.9 Z" fill="#f6abb3" stroke="white" stroke-width="2"/><path d="M100.4,55.8 L94.3,21.4 A90,90 0 0,1 110.0,20.0 L110.0,55.0 A55,55 0 0,0 100.4,55.8 Z" fill="#d4a0a8" stroke="white" stroke-width="2"/></svg>
+      <div class="legend"><div class="legend-item"><span class="legend-dot" style="background:#e38f97"></span><span class="legend-text">有時會（50.6%）</span></div><div class="legend-item"><span class="legend-dot" style="background:#c77a85"></span><span class="legend-text">經常感到困擾（37.3%）</span></div><div class="legend-item"><span class="legend-dot" style="background:#f6abb3"></span><span class="legend-text">很少（9.2%）</span></div><div class="legend-item"><span class="legend-dot" style="background:#d4a0a8"></span><span class="legend-text">從未（2.8%）</span></div></div>
+    </div>
+    <div class="pie-right">
+      <div class="insight-box">
+    <div class="insight-title">🔍 洞察</div>
+    <div class="insight-zh">「よく困る」「時々ある」の合計が88%。旅行者のほぼ全員が荷物に不便を感じており、市場ニーズは非常に明確です。</div>
+    <div class="insight-jp">「有時」+「經常困擾」合計達 88%，幾乎全體旅行者都曾因行李感到不便，市場需求強烈且明確。</div>
+  </div>
+      <table class="data-table">
+        <thead><tr><th>選択肢</th><th>回答数</th><th>割合</th></tr></thead>
+        <tbody><tr><td>有時會</td><td>746</td><td class="pct-cell">50.6%</td></tr><tr><td>經常感到困擾</td><td>550</td><td class="pct-cell">37.3%</td></tr><tr><td>很少</td><td>136</td><td class="pct-cell">9.2%</td></tr><tr><td>從未</td><td>41</td><td class="pct-cell">2.8%</td></tr></tbody>
+      </table>
+    </div>
+  </div></div>
+    
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-badge">Q2</div>
+      <div class="q-titles">
+        <div class="q-title-zh">困ったのは主にどのような時ですか？（複数選択可）</div>
+        <div class="q-title-jp">承上題，通常是在什麼時候感到困擾？（複選）</div>
+      </div>
+    </div>
+    <div class="q-divider"></div>
+    <div class="chart-area"><div class="bar-chart">
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">都市間移動時（新幹線など）</div>
+        <div class="label-jp">換城市移動（如搭乘新幹線前後）</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:100.0%">
+          <span class="bar-pct">70.7%</span>
+        </div>
+      </div>
+      <div class="bar-count">1,042</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">ホテルのチェックイン前後</div>
+        <div class="label-jp">飯店 Check-in 前或 Check-ou…</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:79.3%">
+          <span class="bar-pct">56.1%</span>
+        </div>
+      </div>
+      <div class="bar-count">826</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">買い物で荷物が増えた時</div>
+        <div class="label-jp">購物完戰利品太多時</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:54.6%">
+          <span class="bar-pct">38.6%</span>
+        </div>
+      </div>
+      <div class="bar-count">569</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">子供や高齢者と同行時</div>
+        <div class="label-jp">帶小孩或長輩同行時</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:29.2%">
+          <span class="bar-pct">20.6%</span>
+        </div>
+      </div>
+      <div class="bar-count">304</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">不便を感じない</div>
+        <div class="label-jp">不會困擾</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:6.0%">
+          <span class="bar-pct">4.3%</span>
+        </div>
+      </div>
+      <div class="bar-count">63</div>
+    </div></div><div class="low-note">その他少数意見 / 其他少量回覆（各 n&lt;10）：進入景點不方便帶行李 / 進入景點不方便帶行李（1名）、跨縣市移動想在中途城市或景點稍作停留遊玩時/離開主要停留城市，只離開一兩天，之後還會回來，不想帶大型行李一起移動，需要隔夜寄存時 / 跨縣市移動想在中途城市或景點稍作停留遊玩時/離開主要停留城市，只離開一兩天，之後還會回來，不想帶大型行李一起移動，需要隔夜寄存時（1名）、雪地移動時 / 雪地移動時（1名）、最後一天要準備搭飛機前的逛街行程 / 最後一天要準備搭飛機前的逛街行程（1名）、當天要搭飛機時 / 當天要搭飛機時（1名）、機場要去飯店之前，想順路去其他地點 / 機場要去飯店之前，想順路去其他地點（1名）、提早到機場但還想放大行李去附近逛（下午飛機，上午已到機場） / 提早到機場但還想放大行李去附近逛（下午飛機，上午已到機場）（1名）、大眾交通站台，多數都是樓梯，需要扛行李上下樓 / 大眾交通站台，多數都是樓梯，需要扛行李上下樓（1名）</div></div>
+    <div class="insight-box">
+    <div class="insight-title">🔍 洞察</div>
+    <div class="insight-zh">都市間移動（70.7%）とホテルのチェックイン前後（56.1%）が最大の不便シーン。これが手荷物預かりサービスの最大需要シーンです。</div>
+    <div class="insight-jp">換城市移動是最大痛點（70.7%），其次是飯店 Check-in/out 時段（56.1%）。這兩個場景正是寄存服務最大機會點。</div>
+  </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-badge">Q3</div>
+      <div class="q-titles">
+        <div class="q-title-zh">日本旅行中、荷物預け入れサービスをご利用になりますか？</div>
+        <div class="q-title-jp">您在日本旅遊時，是否常使用行李寄存服務？</div>
+      </div>
+    </div>
+    <div class="q-divider"></div>
+    <div class="chart-area"><div class="pie-layout">
+    <div class="pie-left">
+      <svg xmlns="http://www.w3.org/2000/svg" width="220" height="220"><path d="M110.0,55.0 L110.0,20.0 A90,90 0 0,1 167.2,179.5 L145.0,152.5 A55,55 0 0,0 110.0,55.0 Z" fill="#e38f97" stroke="white" stroke-width="2"/><path d="M145.0,152.5 L167.2,179.5 A90,90 0 0,1 43.1,170.2 L69.1,146.8 A55,55 0 0,0 145.0,152.5 Z" fill="#c77a85" stroke="white" stroke-width="2"/><path d="M69.1,146.8 L43.1,170.2 A90,90 0 0,1 44.8,48.0 L70.1,72.1 A55,55 0 0,0 69.1,146.8 Z" fill="#f6abb3" stroke="white" stroke-width="2"/><path d="M70.1,72.1 L44.8,48.0 A90,90 0 0,1 110.0,20.0 L110.0,55.0 A55,55 0 0,0 70.1,72.1 Z" fill="#d4a0a8" stroke="white" stroke-width="2"/></svg>
+      <div class="legend"><div class="legend-item"><span class="legend-dot" style="background:#e38f97"></span><span class="legend-text">偶爾使用（39.0%）</span></div><div class="legend-item"><span class="legend-dot" style="background:#c77a85"></span><span class="legend-text">每次旅程都會用到（24.3%）</span></div><div class="legend-item"><span class="legend-dot" style="background:#f6abb3"></span><span class="legend-text">經常使用（23.8%）</span></div><div class="legend-item"><span class="legend-dot" style="background:#d4a0a8"></span><span class="legend-text">幾乎不用（12.9%）</span></div></div>
+    </div>
+    <div class="pie-right">
+      <div class="insight-box">
+    <div class="insight-title">🔍 洞察</div>
+    <div class="insight-zh">「たまに」「毎回」「よく」利用する合計が87.1%。ロイヤル顧客層が厚く、継続利用施策が有効です。</div>
+    <div class="insight-jp">曾使用過寄存服務者（偶爾＋每次＋經常）合計達 87.1%，潛在忠實客群基礎扎實。</div>
+  </div>
+      <table class="data-table">
+        <thead><tr><th>選択肢</th><th>回答数</th><th>割合</th></tr></thead>
+        <tbody><tr><td>偶爾使用</td><td>575</td><td class="pct-cell">39.0%</td></tr><tr><td>每次旅程都會用到</td><td>358</td><td class="pct-cell">24.3%</td></tr><tr><td>經常使用</td><td>350</td><td class="pct-cell">23.8%</td></tr><tr><td>幾乎不用</td><td>190</td><td class="pct-cell">12.9%</td></tr></tbody>
+      </table>
+    </div>
+  </div></div>
+    
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-badge">Q4</div>
+      <div class="q-titles">
+        <div class="q-title-zh">現在、主にどこで荷物を預けますか？（複数選択可）</div>
+        <div class="q-title-jp">目前您通常在哪裡寄存行李？（複選）</div>
+      </div>
+    </div>
+    <div class="q-divider"></div>
+    <div class="chart-area"><div class="bar-chart">
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">ホテル（CI前・CO後）</div>
+        <div class="label-jp">飯店（Check-in 前或 Check-ou…</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:100.0%">
+          <span class="bar-pct">72.3%</span>
+        </div>
+      </div>
+      <div class="bar-count">1,065</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">駅コインロッカー</div>
+        <div class="label-jp">車站內的投幣式置物櫃（Coin Locker）</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:83.3%">
+          <span class="bar-pct">60.2%</span>
+        </div>
+      </div>
+      <div class="bar-count">887</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">駅有人預かり所</div>
+        <div class="label-jp">車站的人工行李寄放處（如：JR 服務中心</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:42.0%">
+          <span class="bar-pct">30.3%</span>
+        </div>
+      </div>
+      <div class="bar-count">447</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">商業施設のロッカー</div>
+        <div class="label-jp">商業設施提供的置物櫃（百貨公司等）</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:26.9%">
+          <span class="bar-pct">19.5%</span>
+        </div>
+      </div>
+      <div class="bar-count">287</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">街なかの第三者預け（ecbo cloakな…</div>
+        <div class="label-jp">街頭第三方寄存服務（如：ecbo cloak）</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:16.9%">
+          <span class="bar-pct">12.2%</span>
+        </div>
+      </div>
+      <div class="bar-count">180</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">利用したことがない</div>
+        <div class="label-jp">沒有使用過</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:8.4%">
+          <span class="bar-pct">6.0%</span>
+        </div>
+      </div>
+      <div class="bar-count">89</div>
+    </div></div><div class="low-note">その他少数意見 / 其他少量回覆（各 n&lt;10）：7-11 / 7-11（2名）、機場內電梯旁附設 / 機場內電梯旁附設（1名）、機場貴賓室 / 機場貴賓室（1名）、觀光案內所 / 觀光案內所（1名）、關西機場人工行李寄放處 / 關西機場人工行李寄放處（1名）、商業設施和機場的人工寄物 / 商業設施和機場的人工寄物（1名）、有兼提供寄存行李服務的店家 / 有兼提供寄存行李服務的店家（1名）、機場內投幣式置物櫃 / 機場內投幣式置物櫃（1名）</div></div>
+    <div class="insight-box">
+    <div class="insight-title">🔍 洞察</div>
+    <div class="insight-zh">ホテル（72.3%）・コインロッカー（60.2%）が二強。商業施設利用は19.5%にとどまり、大きな参入余地があります。</div>
+    <div class="insight-jp">飯店（72.3%）與投幣置物櫃（60.2%）是主流，商業設施目前僅 19.5%，Japaholic 進入市場空間極大。</div>
+  </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-badge">Q5</div>
+      <div class="q-titles">
+        <div class="q-title-zh">日本にはコインロッカー以外の荷物預けサービス会社が多数あることをご存知ですか？</div>
+        <div class="q-title-jp">您知道日本目前有許多公司提供「行李寄存服務」（非僅指車站置物櫃）嗎？</div>
+      </div>
+    </div>
+    <div class="q-divider"></div>
+    <div class="chart-area"><div class="pie-layout">
+    <div class="pie-left">
+      <svg xmlns="http://www.w3.org/2000/svg" width="220" height="220"><path d="M110.0,55.0 L110.0,20.0 A90,90 0 1,1 87.4,197.1 L96.2,163.2 A55,55 0 1,0 110.0,55.0 Z" fill="#e38f97" stroke="white" stroke-width="2"/><path d="M96.2,163.2 L87.4,197.1 A90,90 0 0,1 110.0,20.0 L110.0,55.0 A55,55 0 0,0 96.2,163.2 Z" fill="#c77a85" stroke="white" stroke-width="2"/></svg>
+      <div class="legend"><div class="legend-item"><span class="legend-dot" style="background:#e38f97"></span><span class="legend-text">知道（54.0%）</span></div><div class="legend-item"><span class="legend-dot" style="background:#c77a85"></span><span class="legend-text">不知道（46.0%）</span></div></div>
+    </div>
+    <div class="pie-right">
+      <div class="insight-box">
+    <div class="insight-title">🔍 洞察</div>
+    <div class="insight-zh">認知率は54%と過半数超。ただし46%はまだ知らず、ブランド啓発の余地が大きい。</div>
+    <div class="insight-jp">品牌認知略超過一半（54.0%），但仍有 46% 不知道有此類服務，品牌教育是一大課題。</div>
+  </div>
+      <table class="data-table">
+        <thead><tr><th>選択肢</th><th>回答数</th><th>割合</th></tr></thead>
+        <tbody><tr><td>知道</td><td>796</td><td class="pct-cell">54.0%</td></tr><tr><td>不知道</td><td>677</td><td class="pct-cell">46.0%</td></tr></tbody>
+      </table>
+    </div>
+  </div></div>
+    
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-badge">Q6</div>
+      <div class="q-titles">
+        <div class="q-title-zh">どのサービスブランドをご存知ですか？（複数選択可）</div>
+        <div class="q-title-jp">承上題，您知道哪些服務品牌？（複選）</div>
+      </div>
+    </div>
+    <div class="q-divider"></div>
+    <div class="chart-area"><div class="bar-chart">
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">知らない</div>
+        <div class="label-jp">不知道</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:100.0%">
+          <span class="bar-pct">59.1%</span>
+        </div>
+      </div>
+      <div class="bar-count">870</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">ecbo cloak</div>
+        <div class="label-jp">ecbo cloak</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:51.8%">
+          <span class="bar-pct">30.6%</span>
+        </div>
+      </div>
+      <div class="bar-count">451</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">Airporter</div>
+        <div class="label-jp">Airporter</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:30.3%">
+          <span class="bar-pct">17.9%</span>
+        </div>
+      </div>
+      <div class="bar-count">264</div>
+    </div></div><div class="low-note">その他少数意見 / 其他少量回覆（各 n&lt;10）：行李特工 / 行李特工（3名）、ヤマト宅急便 / 黑貓宅急便（2名）、便利商店 / 便利商店（2名）、セブンイレブン / セブンイレブン（1名）、宅急便 / 宅急便（1名）、echo cloak 不給點選只好這樣了 / echo cloak 不給點選只好這樣了（1名）、711等便利店 / 711等便利店（1名）、自營店家 / 自營店家（1名）</div></div>
+    <div class="insight-box">
+    <div class="insight-title">🔍 洞察</div>
+    <div class="insight-zh">59%が全ブランド未認知。ecbo cloak（30.6%）が唯一の認知ブランド。Japaholicのブランド訴求で差別化可能です。</div>
+    <div class="insight-jp">59.1% 完全不知道任何品牌，ecbo cloak 以 30.6% 獨占市場認知。Japaholic 具備強烈差異化空間。</div>
+  </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-badge">Q7</div>
+      <div class="q-titles">
+        <div class="q-title-zh">荷物を預ける際に最もよく困ることは何ですか？（複数選択可）</div>
+        <div class="q-title-jp">您在寄存行李時最常遇到的困難是什麼？（複選）</div>
+      </div>
+    </div>
+    <div class="q-divider"></div>
+    <div class="chart-area"><div class="bar-chart">
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">大型ロッカー（28インチ以上）が少ない</div>
+        <div class="label-jp">大型行李（28 吋以上）的櫃位太少</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:100.0%">
+          <span class="bar-pct">56.3%</span>
+        </div>
+      </div>
+      <div class="bar-count">830</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">ロッカー満杯・空き探しに時間がかかる</div>
+        <div class="label-jp">置物櫃全滿，找空位浪費很多時間</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:98.0%">
+          <span class="bar-pct">55.2%</span>
+        </div>
+      </div>
+      <div class="bar-count">813</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">ホテル⇔駅が遠く取り出しが不便</div>
+        <div class="label-jp">退房後，飯店與車站的距離太遠，來回取件不便</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:92.0%">
+          <span class="bar-pct">51.9%</span>
+        </div>
+      </div>
+      <div class="bar-count">764</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">預け場所がわかりにくく迷ってしまう</div>
+        <div class="label-jp">寄存地點動線混亂，找位置像走迷宮</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:71.6%">
+          <span class="bar-pct">40.3%</span>
+        </div>
+      </div>
+      <div class="bar-count">594</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">營業時間限制，無法太晚或太早取件</div>
+        <div class="label-jp">營業時間限制，無法太晚或太早取件</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:67.5%">
+          <span class="bar-pct">38.0%</span>
+        </div>
+      </div>
+      <div class="bar-count">560</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">現金のみ対応、キャッシュレス不可</div>
+        <div class="label-jp">只能收現金（硬幣），沒有電子支付</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:33.6%">
+          <span class="bar-pct">18.9%</span>
+        </div>
+      </div>
+      <div class="bar-count">279</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">無法跨夜寄放</div>
+        <div class="label-jp">無法跨夜寄放</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:21.2%">
+          <span class="bar-pct">11.9%</span>
+        </div>
+      </div>
+      <div class="bar-count">176</div>
+    </div></div><div class="low-note">その他少数意見 / 其他少量回覆（各 n&lt;10）：無 / 無（3名）、利用したことがない / 沒有使用過（2名）、沒有寄送過行李 / 沒有寄送過行李（1名）、行李太大太重還要拉很遠很麻煩 / 行李太大太重還要拉很遠很麻煩（1名）、利用したことがない / 沒有使用過寄放行李服務（1名）、あまりない / 很貴而且能跨夜的很少，鄉下根本找不到（1名）、常要爬樓梯、不能用新鈔 / 常要爬樓梯、不能用新鈔（1名）、沒用過 / 沒用過（1名）</div></div>
+    <div class="insight-box">
+    <div class="insight-title">🔍 洞察</div>
+    <div class="insight-zh">「大型ロッカー不足」と「満杯」が各56%・55%でトップ。大型荷物対応を強みにすれば競合優位が生まれます。</div>
+    <div class="insight-jp">「大型行李置物櫃太少」與「置物櫃全滿」各佔 56.3% 與 55.2%，為最大痛點。大型行李解決方案是明確競爭優勢。</div>
+  </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-badge">Q8</div>
+      <div class="q-titles">
+        <div class="q-title-zh">大型商業施設での荷物預けサービスがあれば利用しますか？</div>
+        <div class="q-title-jp">若大型商場或電器行提供行李寄存服務，您的使用意願如何？</div>
+      </div>
+    </div>
+    <div class="q-divider"></div>
+    <div class="chart-area"><div class="pie-layout">
+    <div class="pie-left">
+      <svg xmlns="http://www.w3.org/2000/svg" width="220" height="220"><path d="M110.0,55.0 L110.0,20.0 A90,90 0 1,1 74.0,192.5 L88.0,160.4 A55,55 0 1,0 110.0,55.0 Z" fill="#e38f97" stroke="white" stroke-width="2"/><path d="M88.0,160.4 L74.0,192.5 A90,90 0 0,1 28.8,71.3 L60.3,86.3 A55,55 0 0,0 88.0,160.4 Z" fill="#c77a85" stroke="white" stroke-width="2"/><path d="M60.3,86.3 L28.8,71.3 A90,90 0 0,1 103.1,20.3 L105.8,55.2 A55,55 0 0,0 60.3,86.3 Z" fill="#f6abb3" stroke="white" stroke-width="2"/><path d="M105.8,55.2 L103.1,20.3 A90,90 0 0,1 110.0,20.0 L110.0,55.0 A55,55 0 0,0 105.8,55.2 Z" fill="#d4a0a8" stroke="white" stroke-width="2"/></svg>
+      <div class="legend"><div class="legend-item"><span class="legend-dot" style="background:#e38f97"></span><span class="legend-text">高（若地點順路會使用…（56.6%）</span></div><div class="legend-item"><span class="legend-dot" style="background:#c77a85"></span><span class="legend-text">極高（會列為首選）（25.5%）</span></div><div class="legend-item"><span class="legend-dot" style="background:#f6abb3"></span><span class="legend-text">普通（看情況）（16.7%）</span></div><div class="legend-item"><span class="legend-dot" style="background:#d4a0a8"></span><span class="legend-text">低（1.2%）</span></div></div>
+    </div>
+    <div class="pie-right">
+      <div class="insight-box">
+    <div class="insight-title">🔍 洞察</div>
+    <div class="insight-zh">「高い」以上が82%。大型商業施設での荷物預けへの潜在需要は非常に強く、立地が鍵となります。</div>
+    <div class="insight-jp">商場寄存意願「高/極高」合計達 82.1%，市場潛力極強。若地點順路即是使用的首要條件。</div>
+  </div>
+      <table class="data-table">
+        <thead><tr><th>選択肢</th><th>回答数</th><th>割合</th></tr></thead>
+        <tbody><tr><td>高（若地點順路會使用）</td><td>833</td><td class="pct-cell">56.6%</td></tr><tr><td>極高（會列為首選）</td><td>376</td><td class="pct-cell">25.5%</td></tr><tr><td>普通（看情況）</td><td>246</td><td class="pct-cell">16.7%</td></tr><tr><td>低</td><td>18</td><td class="pct-cell">1.2%</td></tr></tbody>
+      </table>
+    </div>
+  </div></div>
+    
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-badge">Q9</div>
+      <div class="q-titles">
+        <div class="q-title-zh">「ショッピングモール・家電量販店」での荷物預けに魅力を感じる理由は？（複数選択可）</div>
+        <div class="q-title-jp">接續上題，吸引您在「商場/電器行」寄物的誘因有哪些？（複選）</div>
+      </div>
+    </div>
+    <div class="q-divider"></div>
+    <div class="chart-area"><div class="bar-chart">
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">預け後すぐ買い物でき、移動が不要</div>
+        <div class="label-jp">寄存完後可以直接在店內開始購物，省去移動負擔</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:100.0%">
+          <span class="bar-pct">73.7%</span>
+        </div>
+      </div>
+      <div class="bar-count">1,086</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">明るく安心、スタッフ管理あり</div>
+        <div class="label-jp">環境較車站明亮、安心，有專人看管</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:70.8%">
+          <span class="bar-pct">52.2%</span>
+        </div>
+      </div>
+      <div class="bar-count">769</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">スペースが広く戦利品の整理に最適</div>
+        <div class="label-jp">空間寬敞，適合重新整理行李內的戰利品</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:49.1%">
+          <span class="bar-pct">36.2%</span>
+        </div>
+      </div>
+      <div class="bar-count">533</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">キャッシュレス決済対応への期待</div>
+        <div class="label-jp">預期會有更彈性的支付方式（信用卡/PayPay…</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:37.7%">
+          <span class="bar-pct">27.8%</span>
+        </div>
+      </div>
+      <div class="bar-count">409</div>
+    </div></div><div class="low-note">その他少数意見 / 其他少量回覆（各 n&lt;10）：多一個選擇 / 多一個選擇（1名）、順路及營業時間24h / 順路及營業時間24h（1名）、價格優惠，還有可領取的時間 / 價格優惠，還有可領取的時間（1名）、商場或電器行普及，較容易找到 / 商場或電器行普及，較容易找到（1名）、管理安全問題，商場人流多，安全性與行李被偷/誤拿很難保障。 / 管理安全問題，商場人流多，安全性與行李被偷/誤拿很難保障。（1名）、沒有 / 沒有（1名）、利於行程使用。 / 利於行程使用。（1名）、行程順路 / 行程順路（1名）</div></div>
+    <div class="insight-box">
+    <div class="insight-title">🔍 洞察</div>
+    <div class="insight-zh">「預け後すぐ買い物できる」が73.7%でトップ。購買行動との連動が最大の訴求ポイントです。</div>
+    <div class="insight-jp">「寄存後直接購物省移動」以 73.7% 高居首位，購物動線的整合是最強賣點。</div>
+  </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-badge">Q10</div>
+      <div class="q-titles">
+        <div class="q-title-zh">どの地区の店舗がこのサービスを提供すると旅程に最も合いますか？（複数選択可）</div>
+        <div class="q-title-jp">哪些區域的商店提供此服務，最符合您的行程需求？</div>
+      </div>
+    </div>
+    <div class="q-divider"></div>
+    <div class="chart-area"><div class="bar-chart">
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">大阪：難波・心斎橋</div>
+        <div class="label-jp">大阪：難波/心齋橋</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:100.0%">
+          <span class="bar-pct">54.7%</span>
+        </div>
+      </div>
+      <div class="bar-count">805</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">東京：新宿</div>
+        <div class="label-jp">東京：新宿</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:87.6%">
+          <span class="bar-pct">47.9%</span>
+        </div>
+      </div>
+      <div class="bar-count">705</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">東京：上野</div>
+        <div class="label-jp">東京：上野</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:86.1%">
+          <span class="bar-pct">47.0%</span>
+        </div>
+      </div>
+      <div class="bar-count">693</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">大阪：梅田</div>
+        <div class="label-jp">大阪：梅田</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:68.0%">
+          <span class="bar-pct">37.1%</span>
+        </div>
+      </div>
+      <div class="bar-count">547</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">東京：渋谷</div>
+        <div class="label-jp">東京：澀谷</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:63.1%">
+          <span class="bar-pct">34.5%</span>
+        </div>
+      </div>
+      <div class="bar-count">508</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">東京：秋葉原</div>
+        <div class="label-jp">東京：秋葉原</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:55.7%">
+          <span class="bar-pct">30.4%</span>
+        </div>
+      </div>
+      <div class="bar-count">448</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">東京：銀座</div>
+        <div class="label-jp">東京：銀座</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:53.5%">
+          <span class="bar-pct">29.3%</span>
+        </div>
+      </div>
+      <div class="bar-count">431</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">東京：池袋</div>
+        <div class="label-jp">東京：池袋</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:52.3%">
+          <span class="bar-pct">28.6%</span>
+        </div>
+      </div>
+      <div class="bar-count">421</div>
+    </div></div></div>
+    <div class="insight-box">
+    <div class="insight-title">🔍 洞察</div>
+    <div class="insight-zh">難波・心斎橋が55%でトップ、新宿（48%）・上野（47%）と続く。複数エリアへの展開が求められます。</div>
+    <div class="insight-jp">難波/心齋橋（54.7%）領先，新宿（47.9%）、上野（47.0%）緊追，建議優先多點佈局。</div>
+  </div>
+  </div>
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-badge">Q11</div>
+    <div class="q-titles">
+      <div class="q-title-zh">東京・大阪以外で荷物預けニーズがある場所はどこですか？（自由記述）</div>
+      <div class="q-title-jp">除了東京、大阪外，還有哪些地方符合您的行李寄放需求？（例如：福岡、京都等等）</div>
+    </div>
+  </div>
+  <div class="q-divider"></div>
+  <div class="chart-area q11-layout"><div class="word-cloud"><div class="word-pill" style="font-size:36px;padding:9px 18px;background:#e38f97;opacity:1.00">京都</div><div class="word-pill" style="font-size:32px;padding:8px 16px;background:#c77a85;opacity:0.81">福岡</div><div class="word-pill" style="font-size:20px;padding:5px 11px;background:#d4a0a8;opacity:0.55">名古屋</div><div class="word-pill" style="font-size:16px;padding:5px 9px;background:#b8cfe8;opacity:0.55">札幌</div><div class="word-pill" style="font-size:16px;padding:5px 9px;background:#6e9fd1;opacity:0.55">北海道</div><div class="word-pill" style="font-size:15px;padding:5px 9px;background:#9ab8d8;opacity:0.55">沖繩</div><div class="word-pill" style="font-size:15px;padding:4px 9px;background:#c0bfc2;opacity:0.55">仙台</div><div class="word-pill" style="font-size:14px;padding:4px 8px;background:#7c787b;opacity:0.55">神戶</div><div class="word-pill" style="font-size:14px;padding:4px 8px;background:#d4bfc3;opacity:0.55">廣島</div><div class="word-pill" style="font-size:14px;padding:4px 8px;background:#b89ba0;opacity:0.55">岡山</div><div class="word-pill" style="font-size:14px;padding:4px 8px;background:#a8c4e8;opacity:0.55">熊本</div><div class="word-pill" style="font-size:14px;padding:4px 8px;background:#c7d0d8;opacity:0.55">橫濱</div><div class="word-pill" style="font-size:14px;padding:4px 8px;background:#e38f97;opacity:0.55">奈良</div><div class="word-pill" style="font-size:14px;padding:4px 8px;background:#c77a85;opacity:0.55">青森</div><div class="word-pill" style="font-size:13px;padding:4px 8px;background:#d4a0a8;opacity:0.55">九州</div><div class="word-pill" style="font-size:13px;padding:4px 8px;background:#b8cfe8;opacity:0.55">福岡 京都</div><div class="word-pill" style="font-size:13px;padding:4px 8px;background:#6e9fd1;opacity:0.55">福岡 名古屋</div><div class="word-pill" style="font-size:13px;padding:4px 8px;background:#9ab8d8;opacity:0.55">四國</div><div class="word-pill" style="font-size:13px;padding:4px 8px;background:#c0bfc2;opacity:0.55">東北</div><div class="word-pill" style="font-size:13px;padding:4px 8px;background:#7c787b;opacity:0.55">金澤</div><div class="word-pill" style="font-size:13px;padding:4px 8px;background:#d4bfc3;opacity:0.55">鳥取</div><div class="word-pill" style="font-size:13px;padding:4px 8px;background:#b89ba0;opacity:0.55">褔岡</div><div class="word-pill" style="font-size:13px;padding:4px 8px;background:#a8c4e8;opacity:0.55">全日本</div><div class="word-pill" style="font-size:13px;padding:4px 8px;background:#c7d0d8;opacity:0.55">淺草</div><div class="word-pill" style="font-size:13px;padding:4px 8px;background:#e38f97;opacity:0.55">千葉</div></div><table class="data-table" style="margin-top:16px"><thead><tr><th>地名</th><th>回答数</th><th>比率</th></tr></thead><tbody><tr><td>1. 京都</td><td>485</td><td class="pct-cell">32.9%</td></tr><tr><td>2. 福岡</td><td>391</td><td class="pct-cell">26.5%</td></tr><tr><td>3. 名古屋</td><td>142</td><td class="pct-cell">9.6%</td></tr><tr><td>4. 札幌</td><td>69</td><td class="pct-cell">4.7%</td></tr><tr><td>5. 北海道</td><td>68</td><td class="pct-cell">4.6%</td></tr><tr><td>6. 沖繩</td><td>49</td><td class="pct-cell">3.3%</td></tr><tr><td>7. 仙台</td><td>46</td><td class="pct-cell">3.1%</td></tr><tr><td>8. 神戶</td><td>23</td><td class="pct-cell">1.6%</td></tr><tr><td>9. 廣島</td><td>19</td><td class="pct-cell">1.3%</td></tr><tr><td>10. 岡山</td><td>19</td><td class="pct-cell">1.3%</td></tr><tr><td>11. 熊本</td><td>17</td><td class="pct-cell">1.2%</td></tr><tr><td>12. 橫濱</td><td>13</td><td class="pct-cell">0.9%</td></tr></tbody></table></div>
+</div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-badge">Q12</div>
+      <div class="q-titles">
+        <div class="q-title-zh">「荷物1個 1,000円」の預け入れ料金について、どのようにお感じですか？</div>
+        <div class="q-title-jp">關於「一件行李 1,000 日圓」的寄存費用，您的接受度為？</div>
+      </div>
+    </div>
+    <div class="q-divider"></div>
+    <div class="chart-area"><div class="pie-layout">
+    <div class="pie-left">
+      <svg xmlns="http://www.w3.org/2000/svg" width="220" height="220"><path d="M110.0,55.0 L110.0,20.0 A90,90 0 0,1 120.5,199.4 L116.4,164.6 A55,55 0 0,0 110.0,55.0 Z" fill="#e38f97" stroke="white" stroke-width="2"/><path d="M116.4,164.6 L120.5,199.4 A90,90 0 0,1 20.0,109.9 L55.0,109.9 A55,55 0 0,0 116.4,164.6 Z" fill="#c77a85" stroke="white" stroke-width="2"/><path d="M55.0,109.9 L20.0,109.9 A90,90 0 0,1 86.8,23.0 L95.8,56.9 A55,55 0 0,0 55.0,109.9 Z" fill="#f6abb3" stroke="white" stroke-width="2"/><path d="M95.8,56.9 L86.8,23.0 A90,90 0 0,1 110.0,20.0 L110.0,55.0 A55,55 0 0,0 95.8,56.9 Z" fill="#d4a0a8" stroke="white" stroke-width="2"/></svg>
+      <div class="legend"><div class="legend-item"><span class="legend-dot" style="background:#e38f97"></span><span class="legend-text">可以接受（若免排隊、…（48.1%）</span></div><div class="legend-item"><span class="legend-dot" style="background:#c77a85"></span><span class="legend-text">稍高，會考慮一下（26.9%）</span></div><div class="legend-item"><span class="legend-dot" style="background:#f6abb3"></span><span class="legend-text">非常合理（為節省時間…（20.8%）</span></div><div class="legend-item"><span class="legend-dot" style="background:#d4a0a8"></span><span class="legend-text">太貴（4.1%）</span></div></div>
+    </div>
+    <div class="pie-right">
+      <div class="insight-box">
+    <div class="insight-title">🔍 洞察</div>
+    <div class="insight-zh">69%が「許容できる」または「妥当」と判断。1,000円の価格設定は市場に受け入れられています。</div>
+    <div class="insight-jp">「可以接受」或「非常合理」合計達 68.9%，1,000 日圓的定價策略已獲市場認同。</div>
+  </div>
+      <table class="data-table">
+        <thead><tr><th>選択肢</th><th>回答数</th><th>割合</th></tr></thead>
+        <tbody><tr><td>可以接受（若免排隊、服務好）</td><td>709</td><td class="pct-cell">48.1%</td></tr><tr><td>稍高，會考慮一下</td><td>396</td><td class="pct-cell">26.9%</td></tr><tr><td>非常合理（為節省時間願意支…</td><td>307</td><td class="pct-cell">20.8%</td></tr><tr><td>太貴</td><td>61</td><td class="pct-cell">4.1%</td></tr></tbody>
+      </table>
+    </div>
+  </div></div>
+    
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-badge">Q13</div>
+      <div class="q-titles">
+        <div class="q-title-zh">荷物預け以外に、どんな追加サービスを期待しますか？（複数選択可）</div>
+        <div class="q-title-jp">除了行李寄存，您希望這個地點還有什麼「額外追加服務」？</div>
+      </div>
+    </div>
+    <div class="q-divider"></div>
+    <div class="chart-area"><div class="bar-chart">
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">荷物配送（空港・次の宿泊先へ直送）</div>
+        <div class="label-jp">行李代寄服務： 直接從店裡寄往機場或下一間飯店</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:100.0%">
+          <span class="bar-pct">72.7%</span>
+        </div>
+      </div>
+      <div class="bar-count">1,071</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">休憩・充電スペース（Wi-Fi完備）</div>
+        <div class="label-jp">休息與補給： 提供座位區、免費 Wi-Fi 及…</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:65.6%">
+          <span class="bar-pct">47.7%</span>
+        </div>
+      </div>
+      <div class="bar-count">703</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">梱包強化サービス（精密機器専門）</div>
+        <div class="label-jp">包裝優化服務（付費）： 專業人員協助打包加固電…</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:36.3%">
+          <span class="bar-pct">26.4%</span>
+        </div>
+      </div>
+      <div class="bar-count">389</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">
+        <div class="label-zh">ローカル情報（隠れグルメなど）</div>
+        <div class="label-jp">在地推薦資訊： 提供附近隱藏版美食或在地人社群…</div>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:35.3%">
+          <span class="bar-pct">25.7%</span>
+        </div>
+      </div>
+      <div class="bar-count">378</div>
+    </div></div><div class="low-note">その他少数意見 / 其他少量回覆（各 n&lt;10）：不需要，夠安全能隔夜寄放就好 / 不需要，夠安全能隔夜寄放就好（1名）、延長時間、 / 延長時間、（1名）、視寄放時間長度調整價格的彈性 / 視寄放時間長度調整價格的彈性（1名）、隔夜寄放或多天寄放 / 隔夜寄放或多天寄放（1名）、寄放過夜 / 寄放過夜（1名）、不需要 / 不需要（1名）、可以寄存多天，而非限制當天要取 / 可以寄存多天，而非限制當天要取（1名）、無。附加服務太多，擔心影響純寄物的費用。 / 無。附加服務太多，擔心影響純寄物的費用。（1名）</div></div>
+    <div class="insight-box">
+    <div class="insight-title">🔍 洞察</div>
+    <div class="insight-zh">荷物配送サービスが73%で圧倒的首位。空港やホテルへの直送は最優先の付加価値です。</div>
+    <div class="insight-jp">行李代寄服務（直送機場/下間飯店）以 72.7% 大幅領先，是最值得優先開發的附加服務。</div>
+  </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-badge">Q14</div>
+      <div class="q-titles">
+        <div class="q-title-zh">「Japaholic」が大型店舗内に荷物預けサービス（Japaholic Lounge）を設けた場合、ご利用いただけますか？</div>
+        <div class="q-title-jp">如果「Japaholic」在大型商場或電器行內提供行李寄存服務（Japaholic Lounge），您的使用意願如何？</div>
+      </div>
+    </div>
+    <div class="q-divider"></div>
+    <div class="chart-area"><div class="pie-layout">
+    <div class="pie-left">
+      <svg xmlns="http://www.w3.org/2000/svg" width="220" height="220"><path d="M110.0,55.0 L110.0,20.0 A90,90 0 1,1 84.1,196.2 L94.2,162.7 A55,55 0 1,0 110.0,55.0 Z" fill="#e38f97" stroke="white" stroke-width="2"/><path d="M94.2,162.7 L84.1,196.2 A90,90 0 0,1 20.5,100.7 L55.3,104.3 A55,55 0 0,0 94.2,162.7 Z" fill="#c77a85" stroke="white" stroke-width="2"/><path d="M55.3,104.3 L20.5,100.7 A90,90 0 0,1 94.3,21.4 L100.4,55.8 A55,55 0 0,0 55.3,104.3 Z" fill="#f6abb3" stroke="white" stroke-width="2"/><path d="M100.4,55.8 L94.3,21.4 A90,90 0 0,1 110.0,20.0 L110.0,55.0 A55,55 0 0,0 100.4,55.8 Z" fill="#d4a0a8" stroke="white" stroke-width="2"/></svg>
+      <div class="legend"><div class="legend-item"><span class="legend-dot" style="background:#e38f97"></span><span class="legend-text">高（若行程順路會優先…（54.7%）</span></div><div class="legend-item"><span class="legend-dot" style="background:#c77a85"></span><span class="legend-text">普通（視當時行李負擔…（22.0%）</span></div><div class="legend-item"><span class="legend-dot" style="background:#f6abb3"></span><span class="legend-text">極高（因為信任 Ja…（20.6%）</span></div><div class="legend-item"><span class="legend-dot" style="background:#d4a0a8"></span><span class="legend-text">低（沒有使用行李寄存…（2.8%）</span></div></div>
+    </div>
+    <div class="pie-right">
+      <div class="insight-box">
+    <div class="insight-title">🔍 洞察</div>
+    <div class="insight-zh">Japaholicブランドへの信頼が付加価値となり、高・非常に高いの合計が75.3%。ブランド力が強力な市場参入の追い風です。</div>
+    <div class="insight-jp">Japaholic 品牌加持下，「極高」意願達 20.6%，高/極高合計 75.3%。品牌信任是強大的市場進入優勢。</div>
+  </div>
+      <table class="data-table">
+        <thead><tr><th>選択肢</th><th>回答数</th><th>割合</th></tr></thead>
+        <tbody><tr><td>高（若行程順路會優先考慮）</td><td>805</td><td class="pct-cell">54.7%</td></tr><tr><td>普通（視當時行李負擔而定）</td><td>324</td><td class="pct-cell">22.0%</td></tr><tr><td>極高（因為信任 Japah…</td><td>303</td><td class="pct-cell">20.6%</td></tr><tr><td>低（沒有使用行李寄存的習慣）</td><td>41</td><td class="pct-cell">2.8%</td></tr></tbody>
+      </table>
+    </div>
+  </div></div>
+    
+  </div>
+
+<!-- 結論 / Next Steps -->
+<div class="conclusion">
+  <div class="conclusion-header">
+    <div class="conclusion-badge">NEXT STEPS</div>
+    <div>
+      <div class="conclusion-title-jp">アクション提言</div>
+      <div class="conclusion-title-zh">行動建議</div>
+    </div>
+  </div>
+  <div class="next-steps">
+    <div class="step-card">
+      <div class="step-num">ACTION 01</div>
+      <div class="step-title-jp">大阪難波・東京新宿への優先出店</div>
+      <div class="step-title-zh">優先佈局大阪難波/東京新宿據點</div>
+      <div class="step-basis">📍 Q10：難波/心齋橋 54.7%・新宿 47.9% が最高需要エリア</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">ACTION 02</div>
+      <div class="step-title-jp">ヤマト宅急便との荷物転送サービス連携</div>
+      <div class="step-title-zh">整合宅急便的行李轉送服務</div>
+      <div class="step-basis">✈️ Q13：行李代寄需求以 72.7% 壓倒性領先，首要附加服務</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">ACTION 03</div>
+      <div class="step-title-jp">キャッシュレス決済対応（クレカ・PayPay）</div>
+      <div class="step-title-zh">提供電子支付（信用卡/PayPay）</div>
+      <div class="step-basis">💳 Q7：現金のみ対応が上位痛點のひとつ、決済多様化が急務</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">ACTION 04</div>
+      <div class="step-title-jp">大型スーツケース専用スペースの設置</div>
+      <div class="step-title-zh">設置大型行李專用區域</div>
+      <div class="step-basis">🧳 Q7：大型ロッカー不足 56.3%・満杯 55.2% がトップ2痛點</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">ACTION 05</div>
+      <div class="step-title-jp">次の展開エリア：京都・福岡</div>
+      <div class="step-title-zh">下一步拓展：京都、福岡</div>
+      <div class="step-basis">🗺️ Q11：自由填答中京都・福岡が東京/大阪以外の上位需求地</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">ACTION 06</div>
+      <div class="step-title-jp">Japaholicブランド信頼を軸にしたマーケティング</div>
+      <div class="step-title-zh">以 Japaholic 品牌信任感作行銷核心</div>
+      <div class="step-basis">🌸 Q14：品牌加持下高/極高意願達 75.2%，品牌力是最強市場進入武器</div>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
